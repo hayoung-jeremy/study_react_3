@@ -37,8 +37,8 @@ const Auth = () => {
     } catch (error) {
       console.log("this is the error : " + error);
     }
-    setEmail("");
-    setPassword("");
+    // setEmail("");
+    // setPassword("");
   };
   return (
     <div>
