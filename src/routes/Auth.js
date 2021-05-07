@@ -1,10 +1,13 @@
 // login page
 
+import { authService } from "fbase";
 import React, { useState } from "react";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [newAccount, setNewAccount] = useState(true);
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -15,8 +18,25 @@ const Auth = () => {
       setPassword(value);
     }
   };
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+    try {
+      let data;
+      // 새 계정 생성인지, 로그인인지
+      if (newAccount) {
+        // create account
+        data = await authService.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+      } else {
+        // log in
+        data = await authService.signInWithEmailAndPassword(email, password);
+      }
+      console.log(data);
+    } catch (error) {
+      console.log("this is the error : " + error);
+    }
     setEmail("");
     setPassword("");
   };
@@ -39,7 +59,7 @@ const Auth = () => {
           value={password}
           onChange={onChange}
         />
-        <input type="submit" value="Log In" />
+        <input type="submit" value={newAccount ? "Create Account" : "Log In"} />
       </form>
 
       <div>
