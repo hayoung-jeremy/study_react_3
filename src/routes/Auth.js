@@ -20,6 +20,8 @@ const Auth = () => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
+    setEmail("");
+    setPassword("");
     try {
       let data;
       // 새 계정 생성인지, 로그인인지
@@ -37,8 +39,6 @@ const Auth = () => {
     } catch (error) {
       console.log("this is the error : " + error);
     }
-    // setEmail("");
-    // setPassword("");
   };
   return (
     <div>
