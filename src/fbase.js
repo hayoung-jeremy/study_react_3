@@ -15,4 +15,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// Auth.js 에서 직접 firebase 의 auth 를 써야하기 때문 :
+export const firebaseInstance = firebase;
+
 export const authService = firebase.auth();
