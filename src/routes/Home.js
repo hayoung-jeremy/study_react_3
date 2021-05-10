@@ -1,11 +1,17 @@
 // main page
 
+import { dbService } from "fbase";
 import React, { useState } from "react";
 
 const Home = () => {
-  const [haweet, setHaweet] = useState();
-  const onSubmit = (event) => {
+  const [haweet, setHaweet] = useState("");
+  const onSubmit = async (event) => {
     event.preventDefault();
+    await dbService.collection("haweets").add({
+      haweet: haweet,
+      createdAt: Date.now(),
+    });
+    setHaweet("");
   };
   const onChange = (event) => {
     const {
