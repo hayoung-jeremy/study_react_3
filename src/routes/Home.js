@@ -1,5 +1,6 @@
 // main page
 
+import Haweet from "components/Haweet";
 import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 
@@ -44,9 +45,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {haweets.map((haweet) => (
-          <div key={haweet.id}>
-            <h4>{haweet.text}</h4>
-          </div>
+          <Haweet
+            key={haweet.id}
+            haweetObj={haweet}
+            isOwner={haweet.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </div>
