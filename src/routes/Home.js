@@ -3,9 +3,11 @@
 import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({ userObj }) => {
+  console.log(userObj);
   const [haweet, setHaweet] = useState("");
   const [haweets, setHaweets] = useState([]);
+
   const getHaweets = async () => {
     const dbHaweets = await dbService.collection("haweets").get();
     dbHaweets.forEach((document) => {
@@ -22,8 +24,9 @@ const Home = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     await dbService.collection("haweets").add({
-      haweet: haweet,
+      text: haweet,
       createdAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setHaweet("");
   };

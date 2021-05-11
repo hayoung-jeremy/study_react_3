@@ -5,6 +5,8 @@ import { authService } from "fbase";
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
+  const [userObj, setUserObj] = useState(null);
+
   // user 의 로그인, 로그아웃 상태 확인
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
@@ -12,6 +14,7 @@ function App() {
       // 1) user logged in
       if (user) {
         setIsLoggedIn(true);
+        setUserObj(user);
       } else {
         setIsLoggedIn(false);
       }
@@ -20,7 +23,11 @@ function App() {
   }, []);
   return (
     <>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing ..."}
+      {init ? (
+        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+      ) : (
+        "Initializing ..."
+      )}
       <footer> &copy; Hawitter {new Date().getFullYear()} </footer>
     </>
   );
