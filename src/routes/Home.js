@@ -4,22 +4,16 @@ import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {
-  console.log(userObj);
   const [haweet, setHaweet] = useState("");
   const [haweets, setHaweets] = useState([]);
-
-  const getHaweets = async () => {
-    const dbHaweets = await dbService.collection("haweets").get();
-    dbHaweets.forEach((document) => {
-      const haweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setHaweets((prev) => [haweetObject, ...prev]);
-    });
-  };
   useEffect(() => {
-    getHaweets();
+    dbService.collection("haweets").onSnapshot((snapshot) => {
+      const haweetArray = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setHaweets(haweetArray);
+    });
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +30,6 @@ const Home = ({ userObj }) => {
     } = event;
     setHaweet(value);
   };
-  console.log(haweets);
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -52,7 +45,7 @@ const Home = ({ userObj }) => {
       <div>
         {haweets.map((haweet) => (
           <div key={haweet.id}>
-            <h4>{haweet.haweet}</h4>
+            <h4>{haweet.text}</h4>
           </div>
         ))}
       </div>
