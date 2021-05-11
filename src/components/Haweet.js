@@ -7,7 +7,6 @@ const Haweet = ({ haweetObj, isOwner }) => {
 
   const onDeleteClick = () => {
     const ok = window.confirm("Are you sure want to delete this hawwet?");
-    console.log(ok);
     if (ok) {
       //delete
       dbService.doc(`haweets/${haweetObj.id}`).delete();
@@ -32,11 +31,20 @@ const Haweet = ({ haweetObj, isOwner }) => {
     <div>
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
-            <input type="text" value={newHaweet} required onChange={onChange} />
-            <input type="submit" value="Update Haweet" />
-          </form>
-          <button onClick={toggleEditing}>Cancel</button>
+          {isOwner && (
+            <>
+              <form onSubmit={onSubmit}>
+                <input
+                  type="text"
+                  value={newHaweet}
+                  required
+                  onChange={onChange}
+                />
+                <input type="submit" value="Update Haweet" />
+              </form>
+              <button onClick={toggleEditing}>Cancel</button>
+            </>
+          )}
         </>
       ) : (
         <>
