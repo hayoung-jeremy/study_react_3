@@ -7,13 +7,14 @@ import React, { useEffect, useState } from "react";
 const Home = ({ userObj }) => {
   const [haweet, setHaweet] = useState("");
   const [haweets, setHaweets] = useState([]);
+  const [attachment, setAttachment] = useState();
   useEffect(() => {
     dbService.collection("haweets").onSnapshot((snapshot) => {
       const haweetArray = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
+      setHaweets(haweetArray);
       const reader = new FileReader();
     });
   }, []);
@@ -39,9 +40,15 @@ const Home = ({ userObj }) => {
     const theFile = files[0];
     const reader = new FileReader();
     reader.onloadend = (finishedEvent) => {
-      console.log(finishedEvent);
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      setAttachment(result);
     };
     reader.readAsDataURL(theFile);
+  };
+  const onClearAttachment = () => {
+    setAttachment(null);
   };
   return (
     <div>
@@ -55,6 +62,12 @@ const Home = ({ userObj }) => {
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Haweet" />
+        {attachment && (
+          <div>
+            <img src={attachment} width="50px" height="50px" alt="" />
+            <button onClick={onClearAttachment}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {haweets.map((haweet) => (
