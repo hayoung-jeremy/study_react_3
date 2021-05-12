@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 const Home = ({ userObj }) => {
   const [haweet, setHaweet] = useState("");
   const [haweets, setHaweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
   useEffect(() => {
     dbService.collection("haweets").onSnapshot((snapshot) => {
       const haweetArray = snapshot.docs.map((doc) => ({
