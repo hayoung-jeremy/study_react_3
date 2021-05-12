@@ -1,15 +1,16 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useState } from "react";
 
 const Haweet = ({ haweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newHaweet, setNewHaweet] = useState(haweetObj.text);
 
-  const onDeleteClick = () => {
+  const onDeleteClick = async () => {
     const ok = window.confirm("Are you sure want to delete this hawwet?");
     if (ok) {
       //delete
-      dbService.doc(`haweets/${haweetObj.id}`).delete();
+      await dbService.doc(`haweets/${haweetObj.id}`).delete();
+      await storageService.refFromURL(haweetObj.attachmentUrl).delete();
     }
   };
   const toggleEditing = () => setEditing((prev) => !prev);
