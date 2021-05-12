@@ -1,8 +1,9 @@
 // main page
 
 import Haweet from "components/Haweet";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = ({ userObj }) => {
   const [haweet, setHaweet] = useState("");
@@ -20,12 +21,17 @@ const Home = ({ userObj }) => {
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("haweets").add({
+    // first create the ref to the file, and update with some contents
+    const FileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
+    const response = await FileRef.putString(attachment, "data_url");
+    console.log(response);
+    // photo && then haweet
+    /* await dbService.collection("haweets").add({
       text: haweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
     });
-    setHaweet("");
+    setHaweet(""); */
   };
   const onChange = (event) => {
     const {
