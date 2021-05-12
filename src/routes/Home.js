@@ -16,22 +16,29 @@ const Home = ({ userObj }) => {
         ...doc.data(),
       }));
       setHaweets(haweetArray);
-      const reader = new FileReader();
     });
   }, []);
   const onSubmit = async (event) => {
     event.preventDefault();
-    // first create the ref to the file, and update with some contents
-    const FileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`);
-    const response = await FileRef.putString(attachment, "data_url");
-    console.log(response);
-    // photo && then haweet
-    /* await dbService.collection("haweets").add({
+    let attachmentUrl = "";
+    if (attachment !== "") {
+      // first create the ref to the file, and update with some contents
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`);
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL();
+    }
+    const haweetObj = {
       text: haweet,
       createdAt: Date.now(),
       creatorId: userObj.uid,
-    });
-    setHaweet(""); */
+      attachmentUrl,
+    };
+    // photo && then haweet
+    await dbService.collection("haweets").add(haweetObj);
+    setHaweet("");
+    setAttachment("");
   };
   const onChange = (event) => {
     const {

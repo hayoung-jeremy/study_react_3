@@ -49,6 +49,14 @@ const Haweet = ({ haweetObj, isOwner }) => {
       ) : (
         <>
           <h4> {haweetObj.text} </h4>
+          {haweetObj.attachmentUrl && (
+            <img
+              src={haweetObj.attachmentUrl}
+              width="50px"
+              height="50px"
+              alt=""
+            />
+          )}
           {/* 작성자일 경우에만 tweet 편집 및 삭제 가능 */}
           {isOwner && (
             <>
