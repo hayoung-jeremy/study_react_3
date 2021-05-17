@@ -34,28 +34,20 @@ const Haweet = ({ haweetObj, isOwner }) => {
     <div className="nweet">
       {editing ? (
         <>
-          {isOwner && (
-            <>
-              <form onSubmit={onSubmit} className="container nweetEdit">
-                <input
-                  type="text"
-                  value={newHaweet}
-                  required
-                  autoFocus
-                  onChange={onChange}
-                  className="formInput"
-                />
-                <input
-                  type="submit"
-                  value="Update Haweet"
-                  className="formBtn"
-                />
-              </form>
-              <span onClick={toggleEditing} className="formBtn cancelBtn">
-                Cancel
-              </span>
-            </>
-          )}
+          <form onSubmit={onSubmit} className="container nweetEdit">
+            <input
+              type="text"
+              value={newHaweet}
+              required
+              autoFocus
+              onChange={onChange}
+              className="formInput"
+            />
+            <input type="submit" value="Update Haweet" className="formBtn" />
+          </form>
+          <span onClick={toggleEditing} className="formBtn cancelBtn">
+            Cancel
+          </span>
         </>
       ) : (
         <>
@@ -65,7 +57,7 @@ const Haweet = ({ haweetObj, isOwner }) => {
           )}
           {/* 작성자일 경우에만 tweet 편집 및 삭제 가능 */}
           {isOwner && (
-            <div>
+            <div className="nweet__actions">
               <span onClick={onDeleteClick}>
                 <FontAwesomeIcon icon={faTrash} />
               </span>

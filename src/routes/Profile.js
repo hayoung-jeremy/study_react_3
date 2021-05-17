@@ -21,7 +21,7 @@ const Profile = ({ refreshUser, userObj }) => {
   };
   useEffect(() => {
     getMyHaweets();
-  }, []);
+  });
   const onChange = (event) => {
     const {
       target: { value },

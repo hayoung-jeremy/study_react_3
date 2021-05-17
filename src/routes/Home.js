@@ -2,7 +2,7 @@
 
 import Haweet from "components/Haweet";
 import HaweetFactory from "components/HaweetFacotry";
-import { dbService, storageService } from "fbase";
+import { dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 
 const Home = ({ userObj }) => {

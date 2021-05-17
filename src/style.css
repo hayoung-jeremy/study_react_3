@@ -177,6 +177,7 @@ form {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   color: rgba(0, 0, 0, 0.8);
 }
 
@@ -193,11 +194,11 @@ form {
   height: 50px;
   margin-top: 10px;
 }
-
 .nweet__actions {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .nweet__actions span {
