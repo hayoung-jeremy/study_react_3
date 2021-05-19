@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/study_react_3.git/static/css/main.901428ca.chunk.css",
+    "main.js": "/study_react_3.git/static/js/main.fb708e8a.chunk.js",
+    "main.js.map": "/study_react_3.git/static/js/main.fb708e8a.chunk.js.map",
+    "runtime-main.js": "/study_react_3.git/static/js/runtime-main.649562d8.js",
+    "runtime-main.js.map": "/study_react_3.git/static/js/runtime-main.649562d8.js.map",
+    "static/js/2.1a4c25aa.chunk.js": "/study_react_3.git/static/js/2.1a4c25aa.chunk.js",
+    "static/js/2.1a4c25aa.chunk.js.map": "/study_react_3.git/static/js/2.1a4c25aa.chunk.js.map",
+    "index.html": "/study_react_3.git/index.html",
+    "static/css/main.901428ca.chunk.css.map": "/study_react_3.git/static/css/main.901428ca.chunk.css.map",
+    "static/js/2.1a4c25aa.chunk.js.LICENSE.txt": "/study_react_3.git/static/js/2.1a4c25aa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.649562d8.js",
+    "static/js/2.1a4c25aa.chunk.js",
+    "static/css/main.901428ca.chunk.css",
+    "static/js/main.fb708e8a.chunk.js"
+  ]
+}
